@@ -26,4 +26,18 @@ import java.util.regex.Pattern;
 
 public class HttpUrlChecker {
 
+    static Matcher getMatcher(String url) {
+        Pattern p = Pattern.compile("^https?://(www\\.)?(\\w)+(-(\\w)+)*(\\.[a-z]+)+$");
+
+        //(www\\.)?     optional www. zu beginn
+        //(\\w)+        >=1 beliebige Zeichen
+        //(-(\\w)+)*    0 oder mehrere Teile mit Bindestrichen
+        //(\\.[a-z]+)+  Zum Schluss mindestens eine Domain mit .kleinzeichen
+        //[A-Za-z0-9] => \\w
+        //* => 0 oder mehrmals
+        //+ => 1 oder mehrmals
+        //? => 0 oder 1 mal
+        Matcher m = p.matcher(url);
+        return m;
+    }
 }
